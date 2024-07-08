@@ -1,2 +1,40 @@
-# R-Projects
-R Projects
+# Loading the libraries
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(reshape2)
+
+# Load the economics dataset
+data(economics)
+
+# Display the dataset
+economics
+
+# Convert the date column to Date format
+economics$date <- as.Date(economics$date)
+
+# -----------
+# Heatmap
+# -----------
+
+# Excluding the date column from the matrix
+cor_matrix <- cor(economics[, -1])
+
+# Convert the correlation matrix into a format suitable for ggplot2
+melted_cor_matrix <- melt(cor_matrix)
+
+# Create the heatmap
+ggplot(data = melted_cor_matrix, aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white",
+                       midpoint = 0, limit = c(-1, 1), space = "Lab",
+                       name = "Correlation") +
+  geom_text(aes(label = round(value, 2)), color = "black", size = 4) +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, 
+                                   size = 12, hjust = 1)) +
+  coord_fixed() +
+  labs(title = "Correlation Heatmap for Economics Dataset",
+       x = "Variables",
+       y = "Variables")
+
