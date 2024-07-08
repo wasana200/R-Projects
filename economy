@@ -38,3 +38,65 @@ ggplot(data = melted_cor_matrix, aes(x = Var1, y = Var2, fill = value)) +
        x = "Variables",
        y = "Variables")
 
+# ------------------------------------------------------------------
+# Plot 2: Time Series Plot of Unemployment Rate (uempmed)
+# ------------------------------------------------------------------
+# Creating a line plot for unemployment rate over time
+plot_unemployment <- ggplot(data = economics, aes(x = date, y = uempmed)) +
+  geom_line(color = "blue") +
+  labs(title = "Unemployment Rate Over Time",
+       x = "Date",
+       y = "Unemployment Rate") +
+  theme_minimal()
+
+# Displaying the plot
+plot_unemployment
+
+# --------------------------------------------------------------------
+# Plot 3: Time Series Plot of Personal Consumption Expenditures (pce)
+# --------------------------------------------------------------------
+# Creating a line plot for personal consumption expenditures over time
+plot_consumption <- ggplot(data = economics, aes(x = date, y = pce)) +
+  geom_line(color = "red") +
+  labs(title = "Personal Consumption Expenditures Over Time",
+       x = "Date",
+       y = "Personal Consumption Expenditures") +
+  theme_minimal()
+
+# Displaying the plot
+plot_consumption
+
+# --------------------------------------------------------------------
+# Plot 4: Grid Plot
+# --------------------------------------------------------------------
+
+# Create individual plots for each variable
+plot_pce <- ggplot(data = economics, aes(x = date, y = pce)) +
+  geom_line(color = "blue") +
+  labs(title = "Personal Consumption Expenditures Over Time", x = "Date", y = "PCE") +
+  theme_minimal()
+
+plot_pop <- ggplot(data = economics, aes(x = date, y = pop)) +
+  geom_line(color = "green") +
+  labs(title = "Population Over Time", x = "Date", y = "Population") +
+  theme_minimal()
+
+plot_psavert <- ggplot(data = economics, aes(x = date, y = psavert)) +
+  geom_line(color = "red") +
+  labs(title = "Personal Savings Rate Over Time", x = "Date", y = "Savings Rate") +
+  theme_minimal()
+
+plot_uempmed <- ggplot(data = economics, aes(x = date, y = uempmed)) +
+  geom_line(color = "purple") +
+  labs(title = "Median Duration of Unemployment Over Time", x = "Date", y = "Median Unemployment Duration") +
+  theme_minimal()
+
+plot_unemploy <- ggplot(data = economics, aes(x = date, y = unemploy)) +
+  geom_line(color = "orange") +
+  labs(title = "Number of Unemployed Over Time", x = "Date", y = "Unemployed") +
+  theme_minimal()
+
+# Arrange the plots in a matrix layout
+grid.arrange(plot_pce, plot_pop, plot_psavert, plot_uempmed, plot_unemploy, ncol = 2, nrow = 3)
+
+
